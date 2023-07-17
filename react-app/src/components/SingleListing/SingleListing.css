@@ -1,0 +1,121 @@
+/* Single Listing page styles */
+
+.single-listing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+  padding: 30px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 3px #03e9f4;
+}
+
+.inner-listing {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.session-div {
+  margin-top: 25px;
+}
+
+.listing-background {
+  background: no-repeat;
+  background-size: cover;
+  border-radius: 3px;
+  width: 600px;
+  box-shadow: 0 0 5px #03e9f4, 0 0 15px #03e9f4;
+}
+
+.listing-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  margin: 100px;
+}
+
+.listing-title-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+#listing-page-title {
+  font-family: "Staatliches", cursive;
+  color: rgb(170, 228, 240);
+  font-size: 40pt;
+  margin-bottom: 2px;
+  letter-spacing: 4px;
+  text-shadow: 3px 3px 3px rgb(0, 0, 0);
+}
+
+#listing-page-category {
+  border-radius: 3px;
+  padding: 3px;
+  border: 1px solid #78d3d8;
+  color: rgb(139, 196, 209);
+  background-color: #05191a;
+  box-shadow: 3px 3px 3px rgb(0, 0, 0);
+  font-family: "Staatliches", cursive;
+  letter-spacing: 2px;
+  width: fit-content;
+  font-size: 14pt;  
+}
+
+#listing-page-location {
+  font-family: "Roboto Slab", serif;
+  font-style: italic;
+  font-size: 18pt;
+  margin-bottom: 2px;
+  color: rgb(137, 192, 202);
+  text-shadow: 3px 3px 3px rgb(0, 0, 0);
+}
+
+.ratings-div {
+  font-family: "Roboto Slab", serif;
+  margin-bottom: 2px;
+  font-size: 12pt;
+  color: #FFD700;
+  text-shadow: 3px 3px 3px rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+}
+
+.ratings-text {
+  margin-left: 5px;
+}
+
+.listing-page-description {
+  margin-left: 30px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+#listing-page-description {
+  color: rgb(137, 192, 202);
+  font-family: sans-serif;
+  font-size: 16pt;
+  inline-size: 520px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.listing-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.review-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

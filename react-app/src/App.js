@@ -1,32 +1,51 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
-import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import NavBar from "./components/Navigation/NavBar";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Listings from "./components/Listings";
+import SplashPage from "./components/SplashPage";
+import SingleListing from "./components/SingleListing";
+import SearchResults from "./components/SearchResults";
+import Profile from "./components/Profile";
 
 function App() {
+  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
+    (async () => {
+      await dispatch(authenticate());
+      setLoaded(true);
+    })();
   }, [dispatch]);
 
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
+    <BrowserRouter>
+      <NavBar />
+      <Switch>
+        <ProtectedRoute path="/listings" exact={true}>
+          <Listings />
+        </ProtectedRoute>
+        <ProtectedRoute path="/results" exact={true}>
+          <SearchResults />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile" exact={true}>
+          <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute path="/listings/:listingId">
+          <SingleListing />
+        </ProtectedRoute>
+        <Route path="/">
+          <SplashPage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
