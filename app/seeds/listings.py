@@ -1,11 +1,18 @@
-from app.models import db, Listing
+from app.models import db, Listing, User
 from datetime import date
 
 
 def seed_listings():
     today = date.today()
+
+    user1 = User.query.get(1)
+    user2 = User.query.get(2)
+    user3 = User.query.get(3)
+    user4 = User.query.get(4)
+    user5 = User.query.get(5)
+
     listing1 = Listing(
-        user_id=1,
+        user=user1,
         title="Business Listing 1",
         location="Definitely Somewhere",
         category=3,
@@ -16,7 +23,7 @@ def seed_listings():
     )
 
     listing2 = Listing(
-        user_id=2,
+        user=user2,
         title="Business Listing 2",
         location="Definitely Somewhere",
         category=2,
@@ -27,7 +34,7 @@ def seed_listings():
     )
 
     listing3 = Listing(
-        user_id=3,
+        user=user3,
         title="Business Listing 3",
         location="Definitely Somewhere",
         category=2,
@@ -38,7 +45,7 @@ def seed_listings():
     )
 
     listing4 = Listing(
-        user_id=4,
+        user=user4,
         title="Business Listing 4",
         location="Definitely Somewhere",
         category=2,
@@ -49,7 +56,7 @@ def seed_listings():
     )
 
     listing5 = Listing(
-        user_id=5,
+        user=user5,
         title="Business Listing 5",
         location="Definitely Somewhere",
         category=6,
@@ -60,7 +67,7 @@ def seed_listings():
     )
 
     listing6 = Listing(
-        user_id=1,
+        user=user1,
         title="Business Listing 6",
         location="Definitely Somewhere",
         category=2,
@@ -71,7 +78,7 @@ def seed_listings():
     )
 
     listing7 = Listing(
-        user_id=2,
+        user=user2,
         title="Business Listing 7",
         location="Definitely Somewhere",
         category=2,
@@ -82,7 +89,7 @@ def seed_listings():
     )
 
     listing8 = Listing(
-        user_id=3,
+        user=user3,
         title="Business Listing 8",
         location="Definitely Somewhere",
         category=1,
@@ -93,7 +100,7 @@ def seed_listings():
     )
 
     listing9 = Listing(
-        user_id=4,
+        user=user4,
         title="Business Listing 9",
         location="Definitely Somewhere",
         category=6,
@@ -104,7 +111,7 @@ def seed_listings():
     )
 
     listing10 = Listing(
-        user_id=5,
+        user=user5,
         title="Business Listing 10",
         location="Definitely Somewhere",
         category=5,
@@ -115,7 +122,7 @@ def seed_listings():
     )
 
     listing11 = Listing(
-        user_id=1,
+        user=user1,
         title="Business Listing 11",
         location="Definitely Somewhere",
         category=5,
@@ -126,7 +133,7 @@ def seed_listings():
     )
 
     listing12 = Listing(
-        user_id=2,
+        user=user2,
         title="Business Listing 12",
         location="Definitely Somewhere",
         category=5,
@@ -137,7 +144,7 @@ def seed_listings():
     )
 
     listing13 = Listing(
-        user_id=3,
+        user=user3,
         title="Business Listing 13",
         location="Definitely Somewhere",
         category=4,
@@ -148,7 +155,7 @@ def seed_listings():
     )
 
     listing14 = Listing(
-        user_id=4,
+        user=user4,
         title="Business Listing 14",
         location="Definitely Somewhere",
         category=4,
@@ -159,7 +166,7 @@ def seed_listings():
     )
 
     listing15 = Listing(
-        user_id=5,
+        user=user5,
         title="Business Listing 15",
         location="Definitely Somewhere",
         category=4,
@@ -170,7 +177,7 @@ def seed_listings():
     )
 
     listing16 = Listing(
-        user_id=1,
+        user=user1,
         title="Business Listing 16",
         location="Definitely Somewhere",
         category=4,
@@ -181,7 +188,7 @@ def seed_listings():
     )
 
     listing17 = Listing(
-        user_id=2,
+        user=user2,
         title="Business Listing 17",
         location="Definitely Somewhere",
         category=4,
@@ -192,7 +199,7 @@ def seed_listings():
     )
 
     listing18 = Listing(
-        user_id=3,
+        user=user3,
         title="Business Listing 18",
         location="Definitely Somewhere",
         category=4,
@@ -203,7 +210,7 @@ def seed_listings():
     )
 
     listing19 = Listing(
-        user_id=4,
+        user=user4,
         title="Business Listing 19",
         location="Definitely Somewhere",
         category=3,
@@ -214,7 +221,7 @@ def seed_listings():
     )
 
     listing20 = Listing(
-        user_id=5,
+        user=user5,
         title="Business Listing 20",
         location="Definitely Somewhere",
         category=3,
@@ -225,7 +232,7 @@ def seed_listings():
     )
 
     listing21 = Listing(
-        user_id=1,
+        user=user1,
         title="Business Listing 21",
         location="Definitely Somewhere",
         category=3,
@@ -236,7 +243,7 @@ def seed_listings():
     )
 
     listing22 = Listing(
-        user_id=2,
+        user=user2,
         title="Business Listing 22",
         location="Definitely Somewhere",
         category=1,
@@ -247,7 +254,7 @@ def seed_listings():
     )
 
     listing23 = Listing(
-        user_id=3,
+        user=user3,
         title="Business Listing 23",
         location="Definitely Somewhere",
         category=2,
@@ -258,7 +265,7 @@ def seed_listings():
     )
 
     listing24 = Listing(
-        user_id=4,
+        user=user4,
         title="Business Listing 24",
         location="Definitely Somewhere",
         category=1,
@@ -269,7 +276,7 @@ def seed_listings():
     )
 
     listing25 = Listing(
-        user_id=5,
+        user=user5,
         title="Business Listing 25",
         location="Definitely Somewhere",
         category=5,

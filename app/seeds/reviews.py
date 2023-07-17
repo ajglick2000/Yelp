@@ -1,11 +1,18 @@
-from app.models import db, Review
+from app.models import db, Review, User
 from datetime import date
 
 
 def seed_reviews():
     today = date.today()
+
+    user1 = User.query.get(1)
+    user2 = User.query.get(2)
+    user3 = User.query.get(3)
+    user4 = User.query.get(4)
+    user5 = User.query.get(5)
+
     review1 = Review(
-        user_id=2,
+        user=user2,
         listing_id=1,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -15,7 +22,7 @@ def seed_reviews():
     )
 
     review2 = Review(
-        user_id=2,
+        user=user2,
         listing_id=25,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -25,7 +32,7 @@ def seed_reviews():
     )
 
     review3 = Review(
-        user_id=3,
+        user=user3,
         listing_id=25,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -35,7 +42,7 @@ def seed_reviews():
     )
 
     review4 = Review(
-        user_id=3,
+        user=user3,
         listing_id=24,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -45,7 +52,7 @@ def seed_reviews():
     )
 
     review5 = Review(
-        user_id=5,
+        user=user5,
         listing_id=24,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -55,7 +62,7 @@ def seed_reviews():
     )
 
     review6 = Review(
-        user_id=2,
+        user=user2,
         listing_id=23,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -65,7 +72,7 @@ def seed_reviews():
     )
 
     review7 = Review(
-        user_id=4,
+        user=user4,
         listing_id=23,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -75,7 +82,7 @@ def seed_reviews():
     )
 
     review8 = Review(
-        user_id=5,
+        user=user5,
         listing_id=23,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -85,7 +92,7 @@ def seed_reviews():
     )
 
     review9 = Review(
-        user_id=5,
+        user=user5,
         listing_id=22,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -95,7 +102,7 @@ def seed_reviews():
     )
 
     review10 = Review(
-        user_id=4,
+        user=user4,
         listing_id=21,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -105,7 +112,7 @@ def seed_reviews():
     )
 
     review11 = Review(
-        user_id=2,
+        user=user2,
         listing_id=20,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -115,7 +122,7 @@ def seed_reviews():
     )
 
     review12 = Review(
-        user_id=3,
+        user=user3,
         listing_id=19,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -125,7 +132,7 @@ def seed_reviews():
     )
 
     review13 = Review(
-        user_id=4,
+        user=user4,
         listing_id=18,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -135,7 +142,7 @@ def seed_reviews():
     )
 
     review14 = Review(
-        user_id=4,
+        user=user4,
         listing_id=17,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -145,7 +152,7 @@ def seed_reviews():
     )
 
     review15 = Review(
-        user_id=2,
+        user=user2,
         listing_id=16,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -155,7 +162,7 @@ def seed_reviews():
     )
 
     review16 = Review(
-        user_id=3,
+        user=user3,
         listing_id=15,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -165,7 +172,7 @@ def seed_reviews():
     )
 
     review17 = Review(
-        user_id=5,
+        user=user5,
         listing_id=14,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -175,7 +182,7 @@ def seed_reviews():
     )
 
     review18 = Review(
-        user_id=2,
+        user=user2,
         listing_id=13,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -185,7 +192,7 @@ def seed_reviews():
     )
 
     review19 = Review(
-        user_id=3,
+        user=user3,
         listing_id=12,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -195,7 +202,7 @@ def seed_reviews():
     )
 
     review20 = Review(
-        user_id=4,
+        user=user4,
         listing_id=11,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -205,7 +212,7 @@ def seed_reviews():
     )
 
     review21 = Review(
-        user_id=4,
+        user=user4,
         listing_id=10,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -215,7 +222,7 @@ def seed_reviews():
     )
 
     review22 = Review(
-        user_id=2,
+        user=user2,
         listing_id=9,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -225,7 +232,7 @@ def seed_reviews():
     )
 
     review23 = Review(
-        user_id=5,
+        user=user5,
         listing_id=8,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -235,7 +242,7 @@ def seed_reviews():
     )
 
     review24 = Review(
-        user_id=3,
+        user=user3,
         listing_id=7,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -245,7 +252,7 @@ def seed_reviews():
     )
 
     review25 = Review(
-        user_id=4,
+        user=user4,
         listing_id=6,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -255,7 +262,7 @@ def seed_reviews():
     )
 
     review26 = Review(
-        user_id=2,
+        user=user2,
         listing_id=5,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -265,7 +272,7 @@ def seed_reviews():
     )
 
     review27 = Review(
-        user_id=3,
+        user=user3,
         listing_id=5,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -275,7 +282,7 @@ def seed_reviews():
     )
 
     review28 = Review(
-        user_id=5,
+        user=user5,
         listing_id=4,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -285,7 +292,7 @@ def seed_reviews():
     )
 
     review29 = Review(
-        user_id=5,
+        user=user5,
         listing_id=3,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
@@ -295,7 +302,7 @@ def seed_reviews():
     )
 
     review30 = Review(
-        user_id=5,
+        user=user5,
         listing_id=3,
         title="It was ok",
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",

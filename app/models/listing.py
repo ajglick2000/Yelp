@@ -1,26 +1,40 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import date
+from .review import Review
+
 
 class Listing(db.Model):
-    __tablename__ = 'listings'
+    __tablename__ = "listings"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
+    )
     title = db.Column(db.String(255), nullable=False)
     location = db.Column(db.String(255), nullable=False)
     category = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(5000), nullable=False)
     image_url = db.Column(db.String, nullable=True)
-    rating = db.Column(db.Integer, nullable=True)
     created_at = db.Column(db.Date, nullable=False, default=date.today)
     updated_at = db.Column(db.Date, nullable=False, default=date.today)
 
     user = db.relationship("User", back_populates="listings")
-    reviews = db.relationship("Review", back_populates="listing", cascade="all, delete-orphan")
+    reviews = db.relationship(
+        "Review", back_populates="listing", cascade="all, delete-orphan"
+    )
 
+    @property
+    def rating(self):
+        aggregate_rating = (
+            db.session.query(db.func.avg(Review.rating))
+            .filter(Review.listing_id == self.id)
+            .scalar()
+        )
+        print(aggregate_rating)
+        return aggregate_rating or 0
 
     @property
     def to_dict(self):
