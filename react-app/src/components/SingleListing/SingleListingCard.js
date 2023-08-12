@@ -8,6 +8,7 @@ import AddReviewModal from "../AddReviewModal";
 import ReactStars from "react-rating-stars-component";
 import "./SingleListing.css";
 import { addFavoriteListing, removeFavoriteListing } from "../../store/listing";
+import ContactListingModal from "../ContactListingModal";
 
 function SingleListingCard({ listing, reviews, listingId }) {
     const history = useHistory();
@@ -48,7 +49,6 @@ function SingleListingCard({ listing, reviews, listingId }) {
     }
 
     let handleFavoriteButton = async () => {
-        console.log(isFavorite);
         if (isFavorite) {
             await dispatch(removeFavoriteListing(listingId));
             setIsFavorite(false);
@@ -106,6 +106,7 @@ function SingleListingCard({ listing, reviews, listingId }) {
                     ></i>
                     Favorite
                 </button>
+                <ContactListingModal listingId={listingId} />
                 <AddReviewModal listingId={listingId} />;
             </div>
         );
@@ -123,6 +124,7 @@ function SingleListingCard({ listing, reviews, listingId }) {
                     ></i>
                     Favorite
                 </button>
+                <ContactListingModal listingId={listingId} />
             </div>
         );
     }

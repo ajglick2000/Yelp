@@ -23,6 +23,15 @@ def get_conversation(id, userId):
     return {message.id: message.to_dict() for message in conversation.messages}
 
 
+@conversation_routes.route("/")
+@login_required
+def get_all_conversations():
+    return {
+        conversation.id: conversation.to_dict()
+        for conversation in current_user.conversations
+    }
+
+
 @conversation_routes.route("/<int:id>/<int:userId>", methods=["POST"])
 @login_required
 def send_message(id, userId):

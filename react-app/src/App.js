@@ -10,6 +10,7 @@ import SingleListing from "./components/SingleListing";
 import SearchResults from "./components/SearchResults";
 import Profile from "./components/Profile";
 import Favorites from "./components/Favorites";
+import ConversationPage from "./components/ConversationPage";
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -32,6 +33,12 @@ function App() {
             <Switch>
                 <ProtectedRoute path="/listings" exact={true}>
                     <Listings />
+                </ProtectedRoute>
+                <ProtectedRoute
+                    path="/conversations/:conversationId"
+                    exact={true}
+                >
+                    <ConversationPage />
                 </ProtectedRoute>
                 <ProtectedRoute path="/favorites" exact={true}>
                     <Favorites />

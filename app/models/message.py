@@ -28,6 +28,7 @@ class Message(db.Model):
         return {
             "id": self.id,
             "userId": self.user_id,
+            "username": self.user.username,
             "text": self.text,
             "timestamp": self.timestamp.isoformat(),
         }

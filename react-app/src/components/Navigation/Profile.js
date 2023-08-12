@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
 import { ProfileModal } from "../../context/ProfileModal";
+import ConversationsModal from "../ConversationsModal";
 
 function Profile() {
     const user = useSelector((state) => state.session.user);
@@ -53,6 +54,9 @@ function Profile() {
                                 >
                                     Favorites
                                 </NavLink>
+                            </li>
+                            <li id="profile-listing">
+                                <ConversationsModal />
                             </li>
                             <li id="profile-logout">
                                 <LogoutButton />

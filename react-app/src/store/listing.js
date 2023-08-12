@@ -42,7 +42,6 @@ export const newListing = (newListing) => async (dispatch) => {
     formData.append("description", description);
     formData.append("image_url", image_url);
 
-    console.log(formData);
     const response = await fetch("/api/listings/", {
         method: "POST",
         body: formData,
@@ -114,7 +113,6 @@ export const loadSingleListing = (id) => async (dispatch) => {
 };
 
 export const addFavoriteListing = (id) => async (dispatch) => {
-    console.log("adding favorite in store");
     const res = await fetch(`/api/listings/${id}/favorite`, {
         method: "POST",
     });

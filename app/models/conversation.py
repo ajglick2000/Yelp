@@ -26,5 +26,6 @@ class Conversation(db.Model):
         return {
             "id": self.id,
             "listingId": self.listing_id,
-            "members": {member.to_dict() for member in self.members},
+            "members": [member.to_dict() for member in self.members],
+            "messages": [message.to_dict() for message in self.messages],
         }

@@ -26,7 +26,6 @@ function ListingCard({ listing }) {
     }, [sessionUser, history]);
 
     let handleFavoriteButton = async () => {
-        console.log(isFavorite);
         if (isFavorite) {
             await dispatch(removeFavoriteListing(listing.id));
             setIsFavorite(false);
