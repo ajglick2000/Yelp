@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from ..forms import ListingForm
-from ..models import db, Listing, Review
+from ..forms import ListingForm, MessageForm
+from ..models import db, Listing, Review, Conversation, Message
 from datetime import date
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -25,7 +25,7 @@ def create_listing():
         )
         db.session.add(new_listing)
         db.session.commit()
-        return new_listing.to_dict
+        return new_listing.to_dict()
     else:
         return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
@@ -35,11 +35,14 @@ def get_listings():
     all_listings = {}
     listings = Listing.query.all()
     for listing in listings:
-        all_listings[listing.id] = listing.to_dict
+        all_listings[listing.id] = listing.to_dict(
+            is_favorite=listing in current_user.favorites
+        )
     return all_listings
 
 
 @listing_routes.route("/<int:id>", methods=["PUT"])
+@login_required
 def edit_listing(id):
     form = ListingForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -55,7 +58,7 @@ def edit_listing(id):
 
         db.session.add(listing)
         db.session.commit()
-        return listing.to_dict
+        return listing.to_dict(is_favorite=listing in current_user.favorites)
     else:
         return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
@@ -69,12 +72,14 @@ def delete_listing(id):
 
 
 @listing_routes.route("/<int:id>")
+@login_required
 def get_listing(id):
     listing = Listing.query.get(id)
-    if listing:
-        return listing.to_dict
-    else:
+
+    if not listing:
         return {"error": ["No Listing Found"]}
+
+    return listing.to_dict(is_favorite=listing in current_user.favorites)
 
 
 @listing_routes.route("/<int:id>/reviews", methods=["GET"])
@@ -122,6 +127,44 @@ def remove_from_favorites(id):
 @listing_routes.route("/favorites")
 @login_required
 def get_user_favorites():
-    return {
-        "Favorites": {listing.id: listing.to_dict for listing in current_user.favorites}
-    }
+    return {listing.id: listing.to_dict(True) for listing in current_user.favorites}
+
+
+@listing_routes.route("/<int:id>/messages")
+@login_required
+def get_messages(id):
+    listing = Listing.query.get(id)
+    conversation = listing.conversations.filter(
+        Conversation.members.contains(current_user)
+    ).first()
+    return {message.id: message.to_dict() for message in conversation.messages}
+
+
+@listing_routes.route("/<int:id>/messages", methods=["POST"])
+@login_required
+def send_message(id):
+    listing = Listing.query.get(id)
+    conversation = listing.conversations.filter(
+        Conversation.members.contains(current_user)
+    ).first()
+
+    if not conversation:
+        conversation = Conversation(listing=listing)
+        conversation.members.append(current_user)
+        conversation.members.append(listing.user)
+        db.session.add(conversation)
+        db.session.commit()
+
+    form = MessageForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_message = Message(
+            user=current_user,
+            conversation=conversation,
+            text=form.text.data,
+        )
+        conversation.messages.append(new_message)
+        db.session.commit()
+        return new_message.to_dict()
+    else:
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 401

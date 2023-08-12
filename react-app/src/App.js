@@ -9,44 +9,48 @@ import SplashPage from "./components/SplashPage";
 import SingleListing from "./components/SingleListing";
 import SearchResults from "./components/SearchResults";
 import Profile from "./components/Profile";
+import Favorites from "./components/Favorites";
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            setLoaded(true);
+        })();
+    }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+    if (!loaded) {
+        return null;
+    }
 
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <ProtectedRoute path="/listings" exact={true}>
-          <Listings />
-        </ProtectedRoute>
-        <ProtectedRoute path="/results" exact={true}>
-          <SearchResults />
-        </ProtectedRoute>
-        <ProtectedRoute path="/profile" exact={true}>
-          <Profile />
-        </ProtectedRoute>
-        <ProtectedRoute path="/listings/:listingId">
-          <SingleListing />
-        </ProtectedRoute>
-        <Route path="/">
-          <SplashPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <NavBar />
+            <Switch>
+                <ProtectedRoute path="/listings" exact={true}>
+                    <Listings />
+                </ProtectedRoute>
+                <ProtectedRoute path="/favorites" exact={true}>
+                    <Favorites />
+                </ProtectedRoute>
+                <ProtectedRoute path="/results" exact={true}>
+                    <SearchResults />
+                </ProtectedRoute>
+                <ProtectedRoute path="/profile" exact={true}>
+                    <Profile />
+                </ProtectedRoute>
+                <ProtectedRoute path="/listings/:listingId">
+                    <SingleListing />
+                </ProtectedRoute>
+                <Route path="/">
+                    <SplashPage />
+                </Route>
+            </Switch>
+        </BrowserRouter>
+    );
 }
 
 export default App;

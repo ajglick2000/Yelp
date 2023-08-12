@@ -1,6 +1,7 @@
 const LOAD_ALL_LISTINGS = "listing/loadAllListings";
 const LOAD_SINGLE_LISTING = "listing/loadSingleListing";
 const DELETE_LISTING = "listing/removeListing";
+const TOGGLE_FAVORITE = "listing/toggleFavorite";
 
 const addListing = (listing) => {
     return {
@@ -19,6 +20,13 @@ const loadListings = (listings) => {
 const deleteListing = (id) => {
     return {
         type: DELETE_LISTING,
+        payload: id,
+    };
+};
+
+const toggleFavorite = (id) => {
+    return {
+        type: TOGGLE_FAVORITE,
         payload: id,
     };
 };
@@ -48,6 +56,14 @@ export const newListing = (newListing) => async (dispatch) => {
 
 export const loadAllListings = () => async (dispatch) => {
     const res = await fetch(`/api/listings/`);
+    if (res.ok) {
+        const listings = await res.json();
+        dispatch(loadListings(listings));
+    }
+};
+
+export const loadFavorites = () => async (dispatch) => {
+    const res = await fetch(`/api/listings/favorites`);
     if (res.ok) {
         const listings = await res.json();
         dispatch(loadListings(listings));
@@ -97,6 +113,29 @@ export const loadSingleListing = (id) => async (dispatch) => {
     }
 };
 
+export const addFavoriteListing = (id) => async (dispatch) => {
+    console.log("adding favorite in store");
+    const res = await fetch(`/api/listings/${id}/favorite`, {
+        method: "POST",
+    });
+    if (res.ok) {
+        const data = await res.json();
+        if (data.errors) return data.errors;
+        dispatch(toggleFavorite(id));
+    }
+};
+
+export const removeFavoriteListing = (id) => async (dispatch) => {
+    const res = await fetch(`/api/listings/${id}/favorite`, {
+        method: "DELETE",
+    });
+    if (res.ok) {
+        const data = await res.json();
+        if (data.errors) return data.errors;
+        dispatch(toggleFavorite(id));
+    }
+};
+
 const initialState = {};
 const listingsReducer = (state = initialState, action) => {
     let newState = Object.assign({}, state);
@@ -109,6 +148,11 @@ const listingsReducer = (state = initialState, action) => {
             return newState;
         case DELETE_LISTING:
             delete newState[action.payload];
+            return newState;
+        case TOGGLE_FAVORITE:
+            let currListing = state[action.payload];
+            currListing.isFavorite = !currListing.isFavorite;
+            newState = state;
             return newState;
         default:
             return state;

@@ -1,21 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import EditListingModal from "./EditListingModal";
 import DeleteListingModal from "./DeleteListingModal";
 import ReactStars from "react-rating-stars-component";
+import { addFavoriteListing, removeFavoriteListing } from "../../store/listing";
 
 function ListingCard({ listing }) {
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
 
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         if (!sessionUser) history.push("/");
+        if (listing.isFavorite) {
+            setIsFavorite(true);
+        } else {
+            setIsFavorite(false);
+        }
     }, [sessionUser, history]);
+
+    let handleFavoriteButton = async () => {
+        console.log(isFavorite);
+        if (isFavorite) {
+            await dispatch(removeFavoriteListing(listing.id));
+            setIsFavorite(false);
+        } else {
+            await dispatch(addFavoriteListing(listing.id));
+            setIsFavorite(true);
+        }
+    };
 
     let sessionLinks;
     if (sessionUser.id === listing.userId) {
@@ -49,6 +68,21 @@ function ListingCard({ listing }) {
                         />
                     </Modal>
                 )}
+            </div>
+        );
+    } else {
+        sessionLinks = (
+            <div className="listing-buttons">
+                <button
+                    className={`favorite-button add-review-button`}
+                    onClick={handleFavoriteButton}
+                >
+                    <i
+                        className={`${
+                            isFavorite ? "fa-solid" : "fa-regular"
+                        } fa-heart`}
+                    ></i>
+                </button>
             </div>
         );
     }

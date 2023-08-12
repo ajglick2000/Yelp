@@ -29,6 +29,7 @@ class Listing(db.Model):
     favorited_by = db.relationship(
         "User", secondary=user_favorite, back_populates="favorites"
     )
+    conversations = db.relationship("Conversation", back_populates="listing", lazy='dynamic')
 
     @property
     def rating(self):
@@ -40,8 +41,7 @@ class Listing(db.Model):
         print(aggregate_rating)
         return aggregate_rating or 0
 
-    @property
-    def to_dict(self):
+    def to_dict(self, is_favorite=False):
         return {
             "id": self.id,
             "userId": self.user_id,
@@ -51,6 +51,7 @@ class Listing(db.Model):
             "description": self.description,
             "imageUrl": self.image_url,
             "rating": self.rating,
+            "isFavorite": is_favorite,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
         }
