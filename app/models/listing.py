@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import date
 from .review import Review
+from .user_favorites import user_favorite
 
 
 class Listing(db.Model):
@@ -24,6 +25,9 @@ class Listing(db.Model):
     user = db.relationship("User", back_populates="listings")
     reviews = db.relationship(
         "Review", back_populates="listing", cascade="all, delete-orphan"
+    )
+    favorited_by = db.relationship(
+        "User", secondary=user_favorite, back_populates="favorites"
     )
 
     @property

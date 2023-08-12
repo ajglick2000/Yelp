@@ -49,6 +49,7 @@ def edit_listing(id):
         listing.location = form.location.data
         listing.category = form.category.data
         listing.description = form.description.data
+        listing.image_url = form.image_url.data
         current_time = date.today()
         listing.updated_at = current_time
 
@@ -86,3 +87,41 @@ def listing_reviews(id):
         return all_reviews
     else:
         return {"error": ["No Reviews found for this Listing"]}
+
+
+@listing_routes.route("/<int:id>/favorite", methods=["POST"])
+@login_required
+def add_to_favorites(id):
+    listing = Listing.query.get(id)
+    if not listing:
+        return {"error": ["No Listing Found"]}
+
+    if listing in current_user.favorites:
+        return {"error": ["Listing already in favorites"]}
+
+    current_user.favorites.append(listing)
+    db.session.commit()
+    return {"message": f"Listing {listing.id} has been added to your favorites"}
+
+
+@listing_routes.route("/<int:id>/favorite", methods=["DELETE"])
+@login_required
+def remove_from_favorites(id):
+    listing = Listing.query.get(id)
+    if not listing:
+        return {"error": ["No Listing Found"]}
+
+    if listing not in current_user.favorites:
+        return {"error": ["Listing not in favorites"]}
+
+    current_user.favorites.remove(listing)
+    db.session.commit()
+    return {"message": f"Listing {listing.id} removed from favorites"}
+
+
+@listing_routes.route("/favorites")
+@login_required
+def get_user_favorites():
+    return {
+        "Favorites": {listing.id: listing.to_dict for listing in current_user.favorites}
+    }

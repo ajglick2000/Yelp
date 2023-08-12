@@ -83,11 +83,6 @@ function EditListingModal({ hideModal, listing }) {
         hideModal();
     };
 
-    const updateImage = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-    };
-
     return (
         <div className="listing-form-container">
             <h2>Update Listing Details</h2>
